@@ -5,7 +5,6 @@ import styles from "./style";
 const useStyles = makeStyles(styles);
 
 export const PokemonDetails = ({ details }) => {
-  console.log(details);
   const classes = useStyles();
 
   return (
@@ -17,7 +16,11 @@ export const PokemonDetails = ({ details }) => {
       <div className={classes.abilities}>
         <Typography variant={"h6"}>Abilities</Typography>
         {details.abilities.map((ability) => {
-          return <Typography>{ability.ability.name}</Typography>;
+          return (
+            <Typography key={ability.ability.name}>
+              {ability.ability.name}
+            </Typography>
+          );
         })}
       </div>
     </Card>

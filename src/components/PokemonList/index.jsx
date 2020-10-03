@@ -22,9 +22,9 @@ export const PokemonList = ({ pokemons }) => {
       });
   };
 
-  const toggleDetails = async (pokemon) => {
+  const toggleDetails = (pokemon) => {
     if (!details[pokemon.name]) {
-      await loadDetails(pokemon);
+      loadDetails(pokemon);
     }
     setAreDetailsOpen({
       ...areDetailsOpen,
