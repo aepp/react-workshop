@@ -8,11 +8,17 @@ import {
 } from "@material-ui/core";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { makeStyles } from "@material-ui/core/styles";
 import PokemonDetails from "../PokemonDetails";
+import styles from "./styles";
+
+const useStyles = makeStyles(styles);
 
 export const PokemonList = ({ pokemons }) => {
   const [details, setDetails] = useState({});
   const [areDetailsOpen, setAreDetailsOpen] = useState({});
+
+  const classes = useStyles();
 
   const loadDetails = async (pokemon) => {
     await fetch(pokemon.url)
@@ -34,17 +40,26 @@ export const PokemonList = ({ pokemons }) => {
 
   return (
     <List>
-      {pokemons.map((pokemon) => {
+      {pokemons.map((pokemon, i) => {
         const open = Boolean(areDetailsOpen[pokemon.name]);
         return (
           <React.Fragment key={pokemon.name}>
             <ListItem
+              className={i % 2 !== 0 ? classes.odd : classes.even}
+              classes={{
+                selected:
+                  i % 2 !== 0 ? classes.selectedOdd : classes.selectedEven
+              }}
               onClick={() => toggleDetails(pokemon)}
               selected={open}
               button
             >
               <ListItemIcon>
-                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                {open ? (
+                  <ExpandLessIcon className={classes.colorWhite} />
+                ) : (
+                  <ExpandMoreIcon className={classes.colorWhite} />
+                )}
               </ListItemIcon>
               <ListItemText primary={pokemon.name} />
             </ListItem>

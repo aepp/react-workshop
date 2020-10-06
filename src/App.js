@@ -19,10 +19,15 @@ export default function App() {
     }
   }, [arePokemonsLoaded, setPokemons, setArePokemonsLoaded]);
 
-  if (!arePokemonsLoaded) return <CircularProgress />;
+  if (!arePokemonsLoaded)
+    return (
+      <div style={{ width: "100%", height: "100vh" }}>
+        <CircularProgress />
+      </div>
+    );
 
   return (
-    <div className="App">
+    <div>
       <Typography variant={"h4"}>Pokemon list</Typography>
       <PokemonList pokemons={pokemons} />
     </div>
